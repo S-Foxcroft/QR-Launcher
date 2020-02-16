@@ -55,42 +55,46 @@
             this.settingsToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.Context.Name = "Context";
-            this.Context.Size = new System.Drawing.Size(241, 127);
+            this.Context.Size = new System.Drawing.Size(195, 94);
             // 
             // addNewTaskToolStripMenuItem
             // 
             this.addNewTaskToolStripMenuItem.Name = "addNewTaskToolStripMenuItem";
-            this.addNewTaskToolStripMenuItem.Size = new System.Drawing.Size(240, 30);
+            this.addNewTaskToolStripMenuItem.Size = new System.Drawing.Size(194, 30);
             this.addNewTaskToolStripMenuItem.Text = "Manage Tasks";
             this.addNewTaskToolStripMenuItem.Click += new System.EventHandler(this.AddNewTaskToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(196, 30);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(194, 30);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(196, 30);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(194, 30);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // Ticker
             // 
-            this.Ticker.Interval = 200;
+            this.Ticker.Enabled = true;
             this.Ticker.Tick += new System.EventHandler(this.DoTick);
             // 
             // Core
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(198, 177);
+            this.ClientSize = new System.Drawing.Size(374, 171);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Core";
-            this.Text = "-";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "QR Launcher Image Analysis";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.Load += new System.EventHandler(this.Core_Load);
             this.Context.ResumeLayout(false);
             this.ResumeLayout(false);
 

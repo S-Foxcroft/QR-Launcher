@@ -10,11 +10,13 @@ namespace QR_Launcher
         public TaskBox()
         {
             InitializeComponent();
+            LoadTasks();
         }
         private void LoadTasks()
         {
             comboBox1.Items.Clear();
             foreach(string s in Prefs.GetTaskNames()) comboBox1.Items.Add(s);
+            if (comboBox1.Items.Count > 0) comboBox1.SelectedIndex = 0;
         }
         private void LoadTaskData()
         {
@@ -27,11 +29,12 @@ namespace QR_Launcher
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Prefs.AddTask(TaskName.Text, textBox1.Text);
+                Prefs.AddTask(comboBox1.Text, textBox1.Text.Replace("    ","\t"));
                 textBox1.Text = "";
                 textBox1.Visible = false;
                 LoadTaskData();
             }
+                
         }
 
         private void LinkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -40,7 +43,8 @@ namespace QR_Launcher
             int pos = listBox1.SelectedIndex;
             listBox1.Items.RemoveAt(pos);
             Prefs.DropTask(TaskName.Text, pos);
-            listBox1.SelectedIndex = pos;
+            if(pos != 0)
+            listBox1.SelectedIndex = pos-1;
         }
 
         private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -72,13 +76,17 @@ namespace QR_Launcher
             Hide();
         }
 
-        private void TaskName_Leave(object sender, EventArgs e)
+        private void TaskName_KeyDown(object sender, KeyEventArgs e)
         {
-            //update name
-            string s = TaskName.Text;
-            Prefs.Rename(comboBox1.Text, s);
-            LoadTaskData();
-            comboBox1.SelectedText = s;
+            if(e.KeyCode == Keys.Enter)
+            {
+                string s = TaskName.Text;
+                Prefs.Rename(comboBox1.Text, s);
+                LoadTasks();
+                comboBox1.Text = s;
+                LoadTaskData();
+            }
+            
         }
     }
 }

@@ -9,6 +9,7 @@ namespace QR_Launcher
     public partial class Setting : Form
     {
         FilterInfoCollection filters;
+        private bool Lock = false;
         public static VideoCaptureDevice cam;
         public static Setting Instance;
         public Setting()
@@ -24,13 +25,28 @@ namespace QR_Launcher
             {
                 CameraDropdown.Items.Add(device.Name + "{"+device.MonikerString+"}");
             }
+            if (cam != null) {
+                    if(cam.IsRunning) cam.Stop();
+                    cam.NewFrame += FrameTick;
+                    cam.NewFrame -= Core.IncomingFrame;
+                    cam.Start();
+                string target = Prefs.GetPref("camera","default");
+                for (int i = 0; i < CameraDropdown.Items.Count; i++)
+                    if ((string)CameraDropdown.Items[i] == target)
+                    {
+                        Lock = true;
+                        CameraDropdown.SelectedIndex = i;
+                        Lock = false;
+                    }
+            }
         }
 
         private void CameraDropdown_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (Lock) return;
             if(cam != null && cam.IsRunning) cam.Stop();
             cam = new VideoCaptureDevice(filters[CameraDropdown.SelectedIndex].MonikerString);
-            cam.NewFrame -= Core.IncomingFrame;
+            Prefs.SetCamera(filters[CameraDropdown.SelectedIndex]);
             cam.NewFrame += FrameTick;
             cam.Start();
         }
@@ -42,16 +58,27 @@ namespace QR_Launcher
         private void Setting_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-            cam.Stop();
-            cam.NewFrame -= FrameTick;
-            cam.NewFrame += Core.IncomingFrame;
-            cam.Start();
+            if (cam != null)
+            {
+                cam.Stop();
+                cam.NewFrame -= FrameTick;
+                cam.NewFrame += Core.IncomingFrame;
+                cam.Start();
+            }
             Hide();
         }
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            if (cam != null)
+            {
+                cam.Stop();
+                cam.NewFrame -= FrameTick;
+                cam.NewFrame += Core.IncomingFrame;
+                cam.Start();
+            }
+            TaskBox.Instance.Show();
+            Hide();
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using AForge.Video;
+using AForge.Video.DirectShow;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using ZXing;
 
@@ -16,18 +19,31 @@ namespace QR_Launcher
             this.Icon = Properties.Resources.qr;
             Notify.Icon = Properties.Resources.qr;
             Setting.Instance = new Setting();
-            TaskBox.Instance = new TaskBox();
             br = new BarcodeReader();
+            Prefs.Load();
+            string s = Prefs.GetPref("camera", "NIL");
+            if (s != "NIL")
+            {
+                FilterInfoCollection filters = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                int i = 0;
+                foreach (FilterInfo device in filters)
+                {
+                    if (s == device.Name + "{" + device.MonikerString + "}")
+                    {
+                        Setting.cam = new VideoCaptureDevice(device.MonikerString);
+                        break;
+                    }
+                    i++;
+                }
+            }
+            TaskBox.Instance = new TaskBox();
+            Hide();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Exit the program.
-            //Release the camera
-            //Make sure we save the pref files
-            //Then leave
-            Prefs.Save();
             if(Setting.cam.IsRunning) Setting.cam.Stop();
+            Prefs.Save();
             Application.Exit();
         }
 
@@ -44,38 +60,53 @@ namespace QR_Launcher
         private static void RunTask(string s)
         {
             List<string> tasks = Prefs.GetTask(s);
-            ProcessStartInfo psi = new ProcessStartInfo();
-            int pos;
-            foreach (string task in tasks)
+            ProcessStartInfo psi = new ProcessStartInfo
             {
-                if((pos = task.IndexOf(" ")) > 0)
-                {
-                    psi.FileName = task.Substring(0, pos);
-                    psi.Arguments = task.Substring(pos+1);
-                }
-                else psi.FileName = task;
+                FileName = "cmd",
+                CreateNoWindow = true
+            };
+            foreach (string S in tasks)
+            {
+                string task = S;
+                foreach (KeyValuePair<string, string> row in Prefs.Replacements) task = task.Replace("{"+row.Key+"}",row.Value);
+                byte[] data = Encoding.UTF8.GetBytes(task);
+                psi.Arguments = "/C start wrap "+Convert.ToBase64String(data);
                 new Process() { StartInfo = psi }.Start();
             }
         }
         BarcodeReader br;
+        int ticksSinceLast = 0;
         private void DoTick(object sender, EventArgs e) {
             //do analysis here and run the tasks.
+            ticksSinceLast++;
             if(frame != null)
             {
                 Result read = br.Decode(frame);
-                string package = read.ToString();
-                if (package != null && package.StartsWith("QRL.") && package != LastRead)
+                string package = read==null ? "NIL" : read.ToString();
+                if (package != "NIL" && package.StartsWith("QRL."))
                 {
-                    LastRead = package;
-                    RunTask(package.Substring(4));
+                    if (package != LastRead || ticksSinceLast > 500)
+                    {
+                        LastRead = package;
+                        ticksSinceLast = 0;
+                        RunTask(package.Substring(4));
+                    }
                 }
-                else LastRead = null;
             }
         }
 
         private void AddNewTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TaskBox.Instance.Show();
+        }
+
+        private void Core_Load(object sender, EventArgs e)
+        {
+            if(Setting.cam != null)
+            {
+                Setting.cam.NewFrame += IncomingFrame;
+                Setting.cam.Start();
+            }
         }
     }
 }

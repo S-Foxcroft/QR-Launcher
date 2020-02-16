@@ -127,7 +127,7 @@
             this.TaskName.Name = "TaskName";
             this.TaskName.Size = new System.Drawing.Size(299, 26);
             this.TaskName.TabIndex = 12;
-            this.TaskName.Leave += new System.EventHandler(this.TaskName_Leave);
+            this.TaskName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TaskName_KeyDown);
             // 
             // groupBox1
             // 
