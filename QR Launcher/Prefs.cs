@@ -11,16 +11,18 @@ namespace QR_Launcher
         private static Dictionary<string, string> Pairs = null;
         public static Dictionary<string, string> Replacements = null;
         private static Dictionary<string, List<string>> Tasks = null;
+        static string prefix;
         public static void Load()
         {
+            prefix = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\QR Launcher\\";
             if (Pairs == null) Pairs = new Dictionary<string, string>();
             else Pairs.Clear();
             if (Replacements == null) Replacements = new Dictionary<string, string>();
             else Replacements.Clear();
             if (Tasks == null) Tasks = new Dictionary<string, List<string>>();
             else Tasks.Clear();
-            if(File.Exists("prefs.ini"))
-            using (StreamReader sr = new StreamReader(File.OpenRead("prefs.ini")))
+            if(File.Exists(prefix+"prefs.ini"))
+            using (StreamReader sr = new StreamReader(File.OpenRead(prefix+"prefs.ini")))
             {
                 while (!sr.EndOfStream)
                 {
@@ -31,8 +33,8 @@ namespace QR_Launcher
                         else Pairs.Add(line.Substring(0, pos), line.Substring(pos + 1));
                 }
             }
-            if (File.Exists("tasks.ini"))
-            using (StreamReader sr = new StreamReader(File.OpenRead("tasks.ini")))
+            if (File.Exists(prefix+"tasks.ini"))
+            using (StreamReader sr = new StreamReader(File.OpenRead(prefix+"tasks.ini")))
             {
                 string sectionName = "";
                 List<string> sectionContent = new List<string>();
@@ -54,15 +56,16 @@ namespace QR_Launcher
         }
         public static void Save()
         {
+            
             StringBuilder sb = new StringBuilder();
-            using (StreamWriter sw = new StreamWriter(File.OpenWrite("prefs.ini"))) {                
+            using (StreamWriter sw = new StreamWriter(File.OpenWrite(prefix+"prefs.ini"))) {                
                 foreach(KeyValuePair<string,string> row in Pairs)
                 {
                     sb.AppendLine(row.Key+"="+row.Value);
                 }
                 sw.Write(sb.ToString());
             }
-            using (StreamWriter sw = new StreamWriter(File.OpenWrite("tasks.ini"))) {
+            using (StreamWriter sw = new StreamWriter(File.OpenWrite(prefix+"tasks.ini"))) {
                 sb.Clear();
                 foreach(KeyValuePair<string,List<string>> row in Tasks)
                 {

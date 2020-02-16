@@ -42,7 +42,7 @@ namespace QR_Launcher
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(Setting.cam.IsRunning) Setting.cam.Stop();
+            if(Setting.cam != null && Setting.cam.IsRunning) Setting.cam.Stop();
             Prefs.Save();
             Application.Exit();
         }
