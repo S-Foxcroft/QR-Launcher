@@ -13,16 +13,22 @@
     <AssemblyName>AI Setup Project1</AssemblyName>
     <Name>AI Setup Project1</Name>
     <RootNamespace>AI Setup Project1</RootNamespace>
-    <LoadFromTemplate>True</LoadFromTemplate>
+    <LoadFromTemplate>
+    </LoadFromTemplate>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'All' ">
-    <DebugSymbols>false</DebugSymbols>
-    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
-  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DefaultBuild' " />
   <ItemGroup>
     <Compile Include="AI Setup Project1.aip">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QR Launcher\QR Launcher.csproj">
+      <Name>QR Launcher</Name>
+      <Project>{6e2ef070-9dfa-46cf-8e86-37a1b5b46ce0}</Project>
+      <Private>True</Private>
+      <OutputsToImport>PrimaryOutput;References</OutputsToImport>
+    </ProjectReference>
   </ItemGroup>
   <Target Name="Build">
     <Error Text="This project requires Advanced Installer tool. Please download it from https://www.advancedinstaller.com/download.html" />

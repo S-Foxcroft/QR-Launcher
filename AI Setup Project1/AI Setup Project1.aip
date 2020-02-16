@@ -12,6 +12,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_AForge.Video.dll" Value="..\packages\AForge.Video.2.2.5\lib"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_AForge.dll" Value="..\packages\AForge.2.2.5\lib"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_QRLauncher.exe" Value="..\QR Launcher\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_QRLauncher.exe.config" Value="..\QR Launcher\bin\Release"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_wrap.exe" Value="..\QR Launcher Process Wrapper\bin\Release"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_zxing.dll" Value="..\packages\ZXing.Net.0.16.5\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_zxing.presentation.dll" Value="..\packages\ZXing.Net.0.16.5\lib\net45"/>
@@ -19,6 +20,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AForge.Video.dll" Value="AForge.Video.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AForge.dll" Value="AForge.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_QRLauncher.exe" Value="QR Launcher.exe"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_QRLauncher.exe.config" Value="QR Launcher.exe.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_wrap.exe" Value="wrap.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_zxing.dll" Value="zxing.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_zxing.presentation.dll" Value="zxing.presentation.dll"/>
@@ -77,6 +79,7 @@
     <ROW File="zxing.dll" Component_="QRLauncher_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_zxing.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_zxing.dll&gt;" SelfReg="false"/>
     <ROW File="zxing.presentation.dll" Component_="QRLauncher_References" FileName="ZXINGP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_zxing.presentation.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_zxing.presentation.dll&gt;" SelfReg="false"/>
     <ROW File="updater.exe" Component_="updater.exe" FileName="update.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_STUBS&gt;updater.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="QRLauncher.exe.config" Component_="QRLauncher_PrimaryOutput" FileName="QRLAUN~2.CON|[|AI_PROPPATH_FILENAME_PERBUILD_QRLauncher.exe.config]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_QRLauncher.exe.config&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.custcomp.MsiShortcutPropertyComponent">
     <ROW MsiShortcutProperty="QRLauncher_11" Shortcut_="QRLauncher_1" PropertyKey="[AiPreventAutoPin]" PropVariantValue="1"/>
@@ -86,6 +89,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_AForge.Video.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AForge.Video.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AForge.Video.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_AForge.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AForge.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AForge.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_QRLauncher.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_QRLauncher.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_QRLauncher.exe]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_QRLauncher.exe.config" Path="[|AI_PROPPATH_DIR_PERBUILD_QRLauncher.exe.config]\[|AI_PROPPATH_FILENAME_PERBUILD_QRLauncher.exe.config]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_wrap.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_wrap.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_wrap.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_zxing.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_zxing.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_zxing.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_zxing.presentation.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_zxing.presentation.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_zxing.presentation.dll]" Type="2" Content="0"/>
@@ -104,7 +108,7 @@
     <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="7" SignTool="0" EnableLUAPatching="1" UseSha256="1" Thumbprint="a8985d3a65e5e5c4b2d7d66d40c6dd2fb19c5436 Subject: DigiCert Global Root CA&#10;Issuer: DigiCert Global Root CA&#10;Valid from 11/10/2006 to 11/10/2031&#10;User\Root"/>
+    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="0" SignTool="0" EnableLUAPatching="1" UseSha256="1" Thumbprint="a8985d3a65e5e5c4b2d7d66d40c6dd2fb19c5436 Subject: DigiCert Global Root CA&#10;Issuer: DigiCert Global Root CA&#10;Valid from 11/10/2006 to 11/10/2031&#10;User\Root"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
@@ -325,5 +329,6 @@
     <ROW ProjectId="{6e2ef070-9dfa-46cf-8e86-37a1b5b46ce0}" ProjectName="QR Launcher" OutputGroup="References" OutputFile="AForge.Video.dll"/>
     <ROW ProjectId="{6e2ef070-9dfa-46cf-8e86-37a1b5b46ce0}" ProjectName="QR Launcher" OutputGroup="References" OutputFile="zxing.dll"/>
     <ROW ProjectId="{6e2ef070-9dfa-46cf-8e86-37a1b5b46ce0}" ProjectName="QR Launcher" OutputGroup="References" OutputFile="zxing.presentation.dll"/>
+    <ROW ProjectId="{6e2ef070-9dfa-46cf-8e86-37a1b5b46ce0}" ProjectName="QR Launcher" OutputGroup="PrimaryOutput" OutputFile="QRLauncher.exe.config"/>
   </COMPONENT>
 </DOCUMENT>
