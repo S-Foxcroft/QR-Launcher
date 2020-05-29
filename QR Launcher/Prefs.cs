@@ -1,8 +1,11 @@
 ﻿using AForge.Video.DirectShow;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Text;
+using ZXing;
 
 namespace QR_Launcher
 {
@@ -12,6 +15,7 @@ namespace QR_Launcher
         public static Dictionary<string, string> Replacements = null;
         private static Dictionary<string, List<string>> Tasks = null;
         static string prefix;
+        static BarcodeWriter bw = new BarcodeWriter();
         public static void Load()
         {
             prefix = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\QR Launcher\\";
@@ -53,6 +57,30 @@ namespace QR_Launcher
                 }
                 Tasks.Add(sectionName, sectionContent);
             }
+
+            if (!Tasks.ContainsKey("Example Command")) {
+                List<String> test = new List<String>();
+                test.Add("notepad.exe");
+                Tasks.Add("Example Command", test);
+            }
+        }
+        private static void WriteImages()
+        {
+            foreach (KeyValuePair<string, List<string>> row in Tasks)
+                WriteImageIfNotExist(row.Key);
+        }
+        private static void WriteImageIfNotExist(string ID)
+        {
+            string fullPath = prefix + "codes\\" + ID + ".bmp";
+            if (File.Exists(fullPath)) return;
+            bw.Format = BarcodeFormat.QR_CODE;
+            bw.Options.Height = 512;
+            bw.Options.Width = 512;
+            bw.Options.PureBarcode = false;
+            bw.Options.Margin = 1;
+            using (Bitmap code = bw.Write("QRL."+ID)) {
+                code.Save(fullPath);
+            }
         }
         public static void Save()
         {
@@ -74,6 +102,7 @@ namespace QR_Launcher
                 }
                 sw.Write(sb.ToString());
             }
+            WriteImages();
         }
         public static string GetPref(string s, string S)
         {

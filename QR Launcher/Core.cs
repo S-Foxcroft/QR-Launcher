@@ -49,7 +49,6 @@ namespace QR_Launcher
                 Setting.cam.WaitForStop();
             }
             Prefs.Save();
-            Setting.Instance.Close();
             Close();
         }
 
