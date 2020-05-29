@@ -13,12 +13,12 @@ namespace QR_Launcher
 {
     public partial class Core : Form
     {
+        public static bool Running = false;
         public Core()
         {
             InitializeComponent();
             this.Icon = Properties.Resources.qr;
             Notify.Icon = Properties.Resources.qr;
-            Setting.Instance = new Setting();
             br = new BarcodeReader();
             Prefs.Load();
             string s = Prefs.GetPref("camera", "NIL");
@@ -36,26 +36,33 @@ namespace QR_Launcher
                     i++;
                 }
             }
-            TaskBox.Instance = new TaskBox();
             Hide();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(Setting.cam != null && Setting.cam.IsRunning) Setting.cam.Stop();
+            Ticker.Stop();
+            Running = false;
+            if (Setting.cam != null)
+            {
+                Setting.cam.SignalToStop();
+                Setting.cam.WaitForStop();
+            }
             Prefs.Save();
-            Application.Exit();
+            Setting.Instance.Close();
+            Close();
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Setting.Instance = new Setting();
             Setting.Instance.Show();
         }
         static string LastRead = "";
         static Bitmap frame;
         public static void IncomingFrame(object sender, NewFrameEventArgs e)
         {
-            frame = (Bitmap)e.Frame.Clone();
+            if(Running) frame = (Bitmap)e.Frame.Clone();
         }
         private static void RunTask(string s)
         {
@@ -78,6 +85,7 @@ namespace QR_Launcher
         int ticksSinceLast = 0;
         private void DoTick(object sender, EventArgs e) {
             //do analysis here and run the tasks.
+            if (!Running) return;
             ticksSinceLast++;
             if(frame != null)
             {
@@ -97,6 +105,7 @@ namespace QR_Launcher
 
         private void AddNewTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            TaskBox.Instance = new TaskBox();
             TaskBox.Instance.Show();
         }
 
@@ -107,6 +116,12 @@ namespace QR_Launcher
                 Setting.cam.NewFrame += IncomingFrame;
                 Setting.cam.Start();
             }
+            Running = true;
+        }
+
+        private void Notify_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            SettingsToolStripMenuItem_Click(sender, null);
         }
     }
 }

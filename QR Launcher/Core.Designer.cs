@@ -44,8 +44,9 @@
             this.Notify.BalloonTipText = "QR Launcher";
             this.Notify.BalloonTipTitle = "Launching Task onStart";
             this.Notify.ContextMenuStrip = this.Context;
-            this.Notify.Text = "notifyIcon1";
+            this.Notify.Text = "QR Launcher is scanning...";
             this.Notify.Visible = true;
+            this.Notify.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Notify_MouseDoubleClick);
             // 
             // Context
             // 

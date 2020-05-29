@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QR Launcher", "QR Launcher\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QR Launcher Process Wrapper", "QR Launcher Process Wrapper\QR Launcher Process Wrapper.csproj", "{4B9E856C-D934-4A12-8914-DAC7CCA1E3C3}"
 EndProject
-Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "AI Setup Project1", "AI Setup Project1\AI Setup Project1.aiproj", "{F0C5402A-3002-45D3-901B-8DB0DE5699BE}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{D03C69A7-6E8E-481F-89C3-5BB77B10C181}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,12 +28,9 @@ Global
 		{4B9E856C-D934-4A12-8914-DAC7CCA1E3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B9E856C-D934-4A12-8914-DAC7CCA1E3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B9E856C-D934-4A12-8914-DAC7CCA1E3C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0C5402A-3002-45D3-901B-8DB0DE5699BE}.All|Any CPU.ActiveCfg = DefaultBuild
-		{F0C5402A-3002-45D3-901B-8DB0DE5699BE}.All|Any CPU.Build.0 = DefaultBuild
-		{F0C5402A-3002-45D3-901B-8DB0DE5699BE}.Debug|Any CPU.ActiveCfg = DefaultBuild
-		{F0C5402A-3002-45D3-901B-8DB0DE5699BE}.Debug|Any CPU.Build.0 = DefaultBuild
-		{F0C5402A-3002-45D3-901B-8DB0DE5699BE}.Release|Any CPU.ActiveCfg = DefaultBuild
-		{F0C5402A-3002-45D3-901B-8DB0DE5699BE}.Release|Any CPU.Build.0 = DefaultBuild
+		{D03C69A7-6E8E-481F-89C3-5BB77B10C181}.All|Any CPU.ActiveCfg = Release
+		{D03C69A7-6E8E-481F-89C3-5BB77B10C181}.Debug|Any CPU.ActiveCfg = Debug
+		{D03C69A7-6E8E-481F-89C3-5BB77B10C181}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

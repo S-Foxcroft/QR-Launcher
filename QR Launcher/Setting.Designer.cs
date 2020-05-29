@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CameraPreview = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,11 +73,23 @@
             this.linkLabel1.Text = "Manage Tasks";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(13, 319);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(242, 24);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Launch when Windows starts";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 324);
+            this.ClientSize = new System.Drawing.Size(554, 348);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.CameraPreview);
             this.Controls.Add(this.label1);
@@ -102,5 +115,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox CameraPreview;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

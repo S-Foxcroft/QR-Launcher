@@ -72,8 +72,6 @@ namespace QR_Launcher
         private void TaskBox_FormClosing(object sender, FormClosingEventArgs e)
         {
             Prefs.Save();
-            e.Cancel = true;
-            Hide();
         }
 
         private void TaskName_KeyDown(object sender, KeyEventArgs e)
